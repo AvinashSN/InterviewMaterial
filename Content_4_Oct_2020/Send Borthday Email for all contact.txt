@@ -1,0 +1,29 @@
+Create three custom fields
+
+	Receive Birthday Email - Boolean - default (checked)
+	Reset Birthday Email - Boolean - Default (Checked)
+	Next BirthDay - Date
+
+Create WF rule on Contact - Send Birthday Email
+	Evaluation Criteria - Created - Anytime its edited to susequently meet criteria
+	Conditions:
+		Receive Birthday Email =true
+		Reset Birthday Email = false
+		Next BirthDay !=''
+		
+		Add time trigger and  Action
+		 Set trigger for 6 Hours after contact next birthday
+		WF Action - New Email Alert
+			Select Email Template
+			
+	    Add Another time trigger and  Action
+			Set trigger for 6 Hours after contact next birthday
+			WF Action - New Field Update
+			Select the Re-evaluate Workflow Rules after Field Change field.
+			Reset Birthday Email = true
+			
+Create a 2nd Workflow Rule		
+		
+	
+	
+	

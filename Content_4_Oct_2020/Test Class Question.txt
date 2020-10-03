@@ -1,0 +1,65 @@
+What is test class and why it is necessary?
+A test class is a class which helps in checking the quality of code before it can be deployed to Salesforce Production. It helps in code coverage of an Apex class or Trigger.
+
+
+What is code coverage and what is the minimum code coverage for class and trigger?
+Code Coverage is the percentage number of lines covered by the test class by a total number of lines need to be covered.
+Minimum code coverage for the trigger is at least 1% and for class, the overall code coverage of production should be above 75% before a new component can be deployed to the production.
+
+Does Salesforce count calls to system.debug() against the code coverage?
+No, Salesforce does not count it against the code coverage.
+
+Q How is a class defined as a test class ?
+We use annotation isTest before a class to declare it as a test class. By declaring it with isTest Annotation it is not counted against the org’s limit of 3MB of Apex Code.
+
+how is a test method defined?
+A test method is defined as mentioned below:-
+Syntax: static testMethod void testMethodName(){….. Your Code here ……..}
+
+What is seeAllData and why it is recommended to avoid using it?
+Test classes run in a different context, i.e. a test class have no idea about the data stored in Salesforce, by setting seeAllData=true => @isTest(seeAllData = true)
+Enabling this attribute exposes the data from the database to the test class.
+It is recommended not to use as the code coverage of you apex class or trigger will now be dependent on the data which is present in org and depending upon that the code coverage may change.
+
+What is the role of Test.start() and Test.Stop()?
+Test class also abide by the governor limit of Salesforce and we often find ourself hitting governor limits in the test class. To avoid hitting this scenario Salesforce provided us with Test.start() and test.stop().
+Code written between these methods receives a fresh set of governor limits.
+It runs asynchronous methods synchronously.
+These can be used only once per testMethod.
+
+What is System.runAs() Method used for in a test Class?
+Default execution mode of a test class is system mode, and if we want to run this test class as a specific user then we use system.runAs().
+
+How many types of Assert Statements are there and what is their purpose?
+Assert statements are used to compare expected value with the actual value.
+There are three types of assert statements :
+assertEquals(expVal, actVal); returns true if expVal Matches actVal.
+assertNotEqual(expVal, actVal); returns true if expVal does not match actVal.
+assertEquals(expVal > actVal); returns true if the condition is satisfied.
+
+
+What is @testVisible used for while testing an Apex class?
+There could be a possibility that we need to access a private class member, but due to its accessibility, it is not visible to test method. To make them visible to test method we use @Testvisible before any private member in Apex class.
+
+What are the best practices for test class?
+There are many considerations while writing a test class few are mentioned below:-
+Code coverage should not depend on the existing data in the org, i.e. sellAllData should not be true For testing trigger and batch class we should do bulk testing with at least 200 records.
+Testing should be done for the entire scenario not only for the code coverage.
+
+Test.isRunningTest(); to skip certain code in test class coverage
+
+Methods defined with the @testSetup annotation are used for creating common test records that are available for all test methods in the class.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
